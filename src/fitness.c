@@ -23,23 +23,28 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     double *history_ptr;       /* Pointer to HISTORY (interface R and C) */
     double *agent_ptr;         /* Pointer to AGENTS (interface R and C) */
     double *paras_ptr;         /* Pointer to PARAMETERS (interface R and C) */
-    int *dim_HISTORY;       /* Dimensions of the HISTORY array incoming */
-    int *dim_AGENTS;        /* Dimensions of the AGENTS array incoming */
-    int vec_pos;            /* Vector position for making arrays */
-    double *paras;          /* Pointer to PARAMETER (interface R and C) */
+    int *dim_HISTORY;          /* Dimensions of the HISTORY array incoming */
+    int *dim_AGENTS;           /* Dimensions of the AGENTS array incoming */
+    int vec_pos;               /* Vector position for making arrays */
+    double *paras;             /* Pointer to PARAMETER (interface R and C) */
     double **agents;           /* Array of agents */
     double **history;          /* Array of history */
-    int foc;                /* Index for a focal agent */
-    int locus;              /* Index for the locus of an agent */
-    int i, j;               /* Indices */
-    int protected_n;         /* Number of protected R objects */
-    int hist_number;         /* Number of rows in the history array */
-    int hist_option;         /* number of columns in the history array */
-    int agent_number;        /* Total number of agents in the agent array */
-    int loci_number;         /* Total number of loci in each agent */
-    double *fitness_ptr; /* Pointer to the fitnesses of agents */
-    double *fitness; /* Fitnesses of agents */
-
+    int foc;                   /* Index for a focal agent */
+    int locus;                 /* Index for the locus of an agent */
+    int i, j;                  /* Indices */
+    int protected_n;           /* Number of protected R objects */
+    int hist_number;           /* Number of rows in the history array */
+    int hist_option;           /* number of columns in the history array */
+    int agent_number;          /* Total number of agents in the agent array */
+    int loci_number;           /* Total number of loci in each agent */
+    double *fitness_ptr;       /* Pointer to the fitnesses of agents */
+    double *fitness;           /* Fitnesses of agents */
+    double *foc_score;         /* Score of a focal agent */
+    double *agent_1;
+    double *agent_2;
+    double *payoff1;
+    double *payoff2;
+    
     /* First take care of all the reading in of code from R to C */
     /* ====================================================================== */
 
@@ -83,7 +88,7 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     loci_number  = dim_AGENTS[1];
     agents   = malloc(agent_number * sizeof(double *));
     for(foc = 0; foc < agent_number; foc++){
-        agents[foc] = malloc(loci_number * sizeof(double));   
+        agents[foc] = malloc(loci_number * sizeof(double));  
     } 
     vec_pos = 0;
     for(locus = 0; locus < loci_number; locus++){
@@ -99,8 +104,30 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     /* Do the fitness game here now */
     /* ====================================================================== */
     
+    num_opponents = paras_ptr[0];
+    rounds        = paras_ptr[1];
+    
     for(foc = 0; foc < agent_number; foc++){
-        fitness[foc] = 2 * foc;
+        foc_score = malloc(agent_number * sizeof(double));
+        while(num_opponents > 0){
+            do{
+                opp = floor( runif(0, 1) * agent_number);
+            } while(opp == agent_number);
+            
+            agent_1  = malloc(rounds * sizeof(double));
+            agent_2  = malloc(rounds * sizeof(double));
+            payoff1  = malloc(rounds * sizeof(double));
+            payoff2  = malloc(rounds * sizeof(double));
+            
+            /* Special round 1 (not enough history */
+            agent_1[0] = agents[foc][8];
+            agent_2[0] = agents[opp][9];
+            payoff1[0] = /* NEED THE PD FUNCTION */
+            
+            
+            num_opponents--;   
+        }
+        free(foc_score);
     }
     
     /* This code switches from C back to R */
@@ -121,6 +148,7 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     UNPROTECT(protected_n);
     
     /* Free all of the allocated memory used in arrays */
+    free(fitness);
     for(foc = 0; foc < agent_number; foc++){
         free(agents[foc]);
     }

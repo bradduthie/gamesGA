@@ -12,8 +12,8 @@ check_fitness <- function(history, agents, num_opponents = 10, rounds = 100,
     if(useC == TRUE){
         agent_vec   <- unlist(agents);
         agent_array <- matrix(data=agent_vec, nrow=length(agents), byrow=TRUE);
-        parameters <- c(num_opponents, rounds);
-        run_fitness(history, agent_array, parameters);
+        parameters  <- c(num_opponents, rounds);
+        fitness     <- run_fitness(history, agent_array, parameters);
     } else{
         fitness    <- NULL;
         num_agents <- length(agents);
