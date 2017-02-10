@@ -1,8 +1,11 @@
 rm(list=ls(all=TRUE));
 
+# Compile the fitness function with the command below
+# R CMD SHLIB -o fitness.so fitness.c
 
 setwd("~/Dropbox/projects/games_genetic_algorithm");
 
+dyn.load('src/fitness.so');
 source("R/crossover.R");
 source("R/mutation.R");
 source("R/fitness.R");
@@ -64,9 +67,5 @@ while(gen < generations){
 
 final_agent_vec <- unlist(agents);
 final_agents    <- matrix(data=final_agent_vec, ncol = 9 , byrow = TRUE);
-
-
-
-
 
 

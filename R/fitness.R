@@ -10,7 +10,10 @@
 check_fitness <- function(history, agents, num_opponents = 10, rounds = 100,
                           useC = FALSE){
     if(useC == TRUE){
-        fitness <- NULL;    
+        agent_vec   <- unlist(agents);
+        agent_array <- matrix(data=agent_vec, nrow=length(agents), byrow=TRUE);
+        parameters <- c(num_opponents, rounds);
+        run_fitness(history, agent_array, parameters);
     } else{
         fitness    <- NULL;
         num_agents <- length(agents);
@@ -78,4 +81,8 @@ check_fitness <- function(history, agents, num_opponents = 10, rounds = 100,
         }
     }
     return(fitness);
+}
+
+run_fitness <- function(HISTORY, AGENTS, PARAMETERS){
+    .Call("fitness", HISTORY, AGENTS, PARAMETERS);   
 }
