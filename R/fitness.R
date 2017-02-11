@@ -7,12 +7,12 @@
 #'  against
 #' @param rounds The number of rounds that will be played
 #' @return fitness The fitness that each agent accumlated
-check_fitness <- function(history, agents, num_opponents = 10, rounds = 100,
-                          useC = FALSE){
+check_fitness <- function(history, agents, pay, 
+                          num_opponents = 10, rounds = 100, useC = FALSE){
     if(useC == TRUE){
         agent_vec   <- unlist(agents);
         agent_array <- matrix(data=agent_vec, nrow=length(agents), byrow=TRUE);
-        parameters  <- c(num_opponents, rounds);
+        parameters  <- c(num_opponents, rounds, pay);
         fitness     <- run_fitness(history, agent_array, parameters);
     } else{
         fitness    <- NULL;

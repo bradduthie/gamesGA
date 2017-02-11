@@ -22,21 +22,21 @@ for(i in 1:100){
     agents[[i]] <- rbinom(n=9, size=1, prob=0.5);
 }
 
-
+payoffs <- c(2, 0, 3, 1);
 
 PD <- function(a1_play, a2_play){
     points <- 0;
     if(a1_play == 0 & a2_play == 0){
-        points <- 2;
+        points <- payoffs[1];
     }
     if(a1_play == 0 & a2_play == 1){
-        points <- 0;
+        points <- payoffs[2];
     }
     if(a1_play == 1 & a2_play == 0){
-        points <- 3;
+        points <- payoffs[3];
     }
     if(a1_play == 1 & a2_play == 1){
-        points <- 1;
+        points <- payoffs[4];
     }
     return(points);
 }
@@ -53,7 +53,7 @@ while(gen < generations){
     
     agents  <- mutation(agents = agents, prob = 0.05);
     
-    fitness <- check_fitness(history = history, agents = agents);
+    fitness <- check_fitness(history = history, agents = agents, pay = payoffs);
     
     agents  <- tournament(agents = agents, fitness = fitness);
     

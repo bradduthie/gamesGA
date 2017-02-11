@@ -3,6 +3,30 @@
 #include <Rinternals.h>
 #include <Rmath.h>
 
+
+/* =============================================================================
+ * Payoff function
+ * ===========================================================================*/
+int PD(int a1_play, int a2_play, int pay1, int pay2, int pay3, int pay4){
+  int points;
+  
+  points = 0;
+  
+  if(a1_play == 0 && a2_play == 0){
+      points = pay1;
+  }
+  if(a1_play == 0 && a2_play == 1){
+      points = pay2;
+  }
+  if(a1_play == 1 && a2_play == 0){
+      points = pay3;
+  }
+  if(a1_play == 1 && a2_play == 0){
+      points = pay4;
+  }
+  return points;
+}
+
 /* =============================================================================
  * FITNESS FUNCTION:
  * ===========================================================================*/
@@ -44,6 +68,15 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     double *agent_2;
     double *payoff1;
     double *payoff2;
+    int num_opponents;
+    int rounds;
+    int pay1;
+    int pay2;
+    int pay3;
+    int pay4;
+    int opp;
+    int resp_1;
+    int resp_2;
     
     /* First take care of all the reading in of code from R to C */
     /* ====================================================================== */
@@ -106,6 +139,10 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     
     num_opponents = paras_ptr[0];
     rounds        = paras_ptr[1];
+    pay1          = paras_ptr[2];
+    pay2          = paras_ptr[3];
+    pay3          = paras_ptr[4];
+    pay4          = paras_ptr[5];
     
     for(foc = 0; foc < agent_number; foc++){
         foc_score = malloc(agent_number * sizeof(double));
@@ -119,12 +156,27 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
             payoff1  = malloc(rounds * sizeof(double));
             payoff2  = malloc(rounds * sizeof(double));
             
-            /* Special round 1 (not enough history */
+            /* Special round 1 (not enough history) */
             agent_1[0] = agents[foc][8];
-            agent_2[0] = agents[opp][9];
-            payoff1[0] = /* NEED THE PD FUNCTION */
+            agent_2[0] = agents[opp][8];
+            payoff1[0] = PD(agent_1[0], agent_2[0], pay1, pay2, pay3, pay4);
+            payoff2[0] = PD(agent_2[0], agent_1[0], pay1, pay2, pay3, pay4);
             
+            /* Special round 2 (not enough history) */
+            resp_1 = 0;
+            if(agent_2[0] == 1){
+              resp_1 = 1;
+            }
+            resp_2 = 0;
+            if(agent_1[0] == 1){
+              resp_2 = 1;
+            }            
+            agent_1[1] = agents[foc][resp_1];
+            agent_2[1] = agents[opp][resp_2];
+            payoff1[1] = PD(agent_1[1], agent_2[1], pay1, pay2, pay3, pay4);
+            payoff2[1] = PD(agent_2[1], agent_1[1], pay1, pay2, pay3, pay4);
             
+
             num_opponents--;   
         }
         free(foc_score);
