@@ -21,7 +21,7 @@ int PD(int a1_play, int a2_play, int pay1, int pay2, int pay3, int pay4){
   if(a1_play == 1 && a2_play == 0){
       points = pay3;
   }
-  if(a1_play == 1 && a2_play == 0){
+  if(a1_play == 1 && a2_play == 1){
       points = pay4;
   }
   return points;
@@ -63,13 +63,14 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     int loci_number;           /* Total number of loci in each agent */
     double *fitness_ptr;       /* Pointer to the fitnesses of agents */
     double *fitness;           /* Fitnesses of agents */
-    double *foc_score;         /* Score of a focal agent */
     double *agent_1;
     double *agent_2;
     double *payoff1;
     double *payoff2;
     int num_opponents;
+    int opponent;
     int rounds;
+    int round;
     int pay1;
     int pay2;
     int pay3;
@@ -140,16 +141,17 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     /* Do the fitness game here now */
     /* ====================================================================== */
     
-    num_opponents = paras_ptr[0];
-    rounds        = paras_ptr[1];
-    pay1          = paras_ptr[2];
-    pay2          = paras_ptr[3];
-    pay3          = paras_ptr[4];
-    pay4          = paras_ptr[5];
+    num_opponents = (int) paras_ptr[0];
+    rounds        = (int) paras_ptr[1];
+    pay1          = (int) paras_ptr[2];
+    pay2          = (int) paras_ptr[3];
+    pay3          = (int) paras_ptr[4];
+    pay4          = (int) paras_ptr[5];
     
     for(foc = 0; foc < agent_number; foc++){
-        foc_score = malloc(agent_number * sizeof(double));
-        while(num_opponents > 0){
+        fitness[foc] = 0.0;
+        opponent     = num_opponents;
+        while(opponent > 0){
             do{
                 opp = floor( runif(0, 1) * agent_number);
             } while(opp == agent_number);
@@ -160,48 +162,86 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
             payoff2  = malloc(rounds * sizeof(double));
             
             /* Special round 1 (not enough history) */
-            agent_1[0] = agents[foc][8];
-            agent_2[0] = agents[opp][8];
+            agent_1[0] = (int) agents[foc][8];
+            agent_2[0] = (int) agents[opp][8];
             payoff1[0] = PD(agent_1[0], agent_2[0], pay1, pay2, pay3, pay4);
             payoff2[0] = PD(agent_2[0], agent_1[0], pay1, pay2, pay3, pay4);
             
+            fitness[foc] += (double) payoff1[0];
+              
             /* Special round 2 (not enough history) */
-            resp_1 = history[0][2];
+            resp_1 = (int) history[0][2];
             if(agent_2[0] == 1){
-              resp_1 = history[1][2];
+              resp_1 = (int) history[1][2];
             }
-            resp_2 = history[0][2];
+            resp_2 = (int) history[0][2];
             if(agent_1[0] == 1){
-              resp_2 = history[1][2];
+              resp_2 = (int) history[1][2];
             }            
-            agent_1[1] = agents[foc][resp_1];
-            agent_2[1] = agents[opp][resp_2];
+            agent_1[1] = (int) agents[foc][resp_1];
+            agent_2[1] = (int) agents[opp][resp_2];
             payoff1[1] = PD(agent_1[1], agent_2[1], pay1, pay2, pay3, pay4);
             payoff2[1] = PD(agent_2[1], agent_1[1], pay1, pay2, pay3, pay4);
             
+            fitness[foc] += (double) payoff1[1];
+            
             /* Special round 3 (not enough history) */
             resp_1 = 0;
-            while(agent_2[0] != history[resp_1][1] && 
-                  agent_2[1] != history[resp_1][2]
+            while(agent_2[0] != (int) history[resp_1][1] && 
+                  agent_2[1] != (int) history[resp_1][2]
             ){
               resp_1++;
             }
-            resp_1 = 0;
-            while(agent_1[0] != history[resp_2][1] && 
-                  agent_1[1] != history[resp_2][2]
+            resp_2 = 0;
+            while(agent_1[0] != (int) history[resp_2][1] && 
+                  agent_1[1] != (int) history[resp_2][2]
             ){
               resp_2++;
             }            
-            agent_1[2] = agents[foc][resp_1];
-            agent_2[2] = agents[opp][resp_2];
+            agent_1[2] = (int) agents[foc][resp_1];
+            agent_2[2] = (int) agents[opp][resp_2];
             payoff1[2] = PD(agent_1[2], agent_2[2], pay1, pay2, pay3, pay4);
             payoff2[2] = PD(agent_2[2], agent_1[2], pay1, pay2, pay3, pay4);
             
-            /* Remaining rounds (enough history for complete memory) */
+            fitness[foc] += (double) payoff1[2];
             
-            num_opponents--;   
+            /* Remaining rounds (enough history for complete memory) */
+            for(round = 3; round < rounds; round++){
+                mem1 = round - 3;
+                mem2 = round - 2;
+                mem3 = round - 1;
+                resp_1 = 0;
+                while(agent_2[mem1] != (int) history[resp_1][0] &&
+                      agent_2[mem2] != (int) history[resp_1][1] &&
+                      agent_2[mem3] != (int) history[resp_1][2]
+                ){
+                  resp_1++;
+                }
+                resp_2 = 0;
+                while(agent_1[mem1] != (int) history[resp_2][0] &&
+                      agent_1[mem2] != (int) history[resp_2][1] &&
+                      agent_1[mem3] != (int) history[resp_2][2]
+                ){
+                  resp_2++;
+                }
+                agent_1[round] = (int) agents[foc][resp_1];
+                agent_2[round] = (int) agents[opp][resp_2];
+                payoff1[round] = PD(agent_1[round], agent_2[round],
+                                    pay1, pay2, pay3, pay4);
+                payoff2[round] = PD(agent_2[round], agent_1[round],
+                                    pay1, pay2, pay3, pay4);
+                
+                fitness[foc] += (double) payoff1[round];
+            }
+            
+            /* Free memory and move on to the next opponent */
+            free(agent_1);
+            free(agent_2);
+            free(payoff1);
+            free(payoff2);
+
+            opponent--;
         }
-        free(foc_score);
     }
     
     /* This code switches from C back to R */
