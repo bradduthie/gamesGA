@@ -77,6 +77,9 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     int opp;
     int resp_1;
     int resp_2;
+    int mem1;
+    int mem2;
+    int mem3;
     
     /* First take care of all the reading in of code from R to C */
     /* ====================================================================== */
@@ -163,20 +166,39 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
             payoff2[0] = PD(agent_2[0], agent_1[0], pay1, pay2, pay3, pay4);
             
             /* Special round 2 (not enough history) */
-            resp_1 = 0;
+            resp_1 = history[0][2];
             if(agent_2[0] == 1){
-              resp_1 = 1;
+              resp_1 = history[1][2];
             }
-            resp_2 = 0;
+            resp_2 = history[0][2];
             if(agent_1[0] == 1){
-              resp_2 = 1;
+              resp_2 = history[1][2];
             }            
             agent_1[1] = agents[foc][resp_1];
             agent_2[1] = agents[opp][resp_2];
             payoff1[1] = PD(agent_1[1], agent_2[1], pay1, pay2, pay3, pay4);
             payoff2[1] = PD(agent_2[1], agent_1[1], pay1, pay2, pay3, pay4);
             
-
+            /* Special round 3 (not enough history) */
+            resp_1 = 0;
+            while(agent_2[0] != history[resp_1][1] && 
+                  agent_2[1] != history[resp_1][2]
+            ){
+              resp_1++;
+            }
+            resp_1 = 0;
+            while(agent_1[0] != history[resp_2][1] && 
+                  agent_1[1] != history[resp_2][2]
+            ){
+              resp_2++;
+            }            
+            agent_1[2] = agents[foc][resp_1];
+            agent_2[2] = agents[opp][resp_2];
+            payoff1[2] = PD(agent_1[2], agent_2[2], pay1, pay2, pay3, pay4);
+            payoff2[2] = PD(agent_2[2], agent_1[2], pay1, pay2, pay3, pay4);
+            
+            /* Remaining rounds (enough history for complete memory) */
+            
             num_opponents--;   
         }
         free(foc_score);
