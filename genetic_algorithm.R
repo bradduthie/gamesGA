@@ -41,9 +41,10 @@ PD <- function(a1_play, a2_play){
     return(points);
 }
 
-
+AGENTS       <- NULL;
+FITNESS      <- NULL;
 mean_fitness <- NULL;
-generations  <- 20;
+generations  <- 100;
 
 gen <- 0;
 
@@ -53,15 +54,16 @@ while(gen < generations){
     
     agents  <- mutation(agents = agents, prob = 0.05);
     
-    fitness <- check_fitness(history = history, agents = agents, pay = payoffs);
+    fitness <- check_fitness(history = history, agents = agents, pay = payoffs,
+                             useC = TRUE);
     
     agents  <- tournament(agents = agents, fitness = fitness);
     
-    mean_fitness[[gen+1]] <- mean(fitness);
-    
     gen <- gen + 1;
     
-    print(gen);
+    AGENTS[[gen]]  <- agents;
+    FITNESS[[gen]] <- fitness;
+
 }
 
 
@@ -69,3 +71,19 @@ final_agent_vec <- unlist(agents);
 final_agents    <- matrix(data=final_agent_vec, ncol = 9 , byrow = TRUE);
 
 
+MEAN_FITNESS <- lapply(X=FITNESS, FUN=mean);
+MEAN_FITNESS <- unlist(MEAN_FITNESS);
+
+
+strats <- NULL;
+for(i in 1:100){
+    strats[[i]] <- paste(final_agents[i,], collapse=" ");
+}
+
+strats_tab <- table(strats);
+strats_fr  <- as.numeric(strats_tab);
+strats_or  <- order(strats_fr, decreasing=TRUE);
+strats_fr  <- strats_fr[strats_or];
+genomes    <- rownames(strats_tab[strats_or]);
+
+  
