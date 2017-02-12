@@ -23,7 +23,7 @@ check_fitness <- function(history, agents, pay,
             opponents <- sample(x=1:num_agents, size=num_opponents, 
                                 replace=TRUE);
             foc_score <- rep(0, num_opponents);
-        
+            
             for(opps in 1:length(opponents)){
                 opp     <- opponents[opps];
                 agent_1 <- rep(0, rounds);
@@ -34,16 +34,16 @@ check_fitness <- function(history, agents, pay,
                 # Special round 1 (not enough history);
                 agent_1[1] <- agents[[foc]][9]; # First turn
                 agent_2[1] <- agents[[opp]][9];
-                payoff1[1] <- PD(agent_1[1], agent_2[1]);
-                payoff2[1] <- PD(agent_2[1], agent_1[1]);
+                payoff1[1] <- PD(agent_1[1], agent_2[1], pay);
+                payoff2[1] <- PD(agent_2[1], agent_1[1], pay);
             
                 # Special round 2 (not enough history);
                 resp_1     <- which(history[1:2,3] == agent_2[1]);
                 resp_2     <- which(history[1:2,3] == agent_1[1]);
                 agent_1[2] <- agents[[foc]][resp_1];
                 agent_2[2] <- agents[[opp]][resp_2];
-                payoff1[2] <- PD(agent_1[2], agent_2[2]);
-                payoff2[2] <- PD(agent_2[2], agent_1[2]);
+                payoff1[2] <- PD(agent_1[2], agent_2[2], pay);
+                payoff2[2] <- PD(agent_2[2], agent_1[2], pay);
             
                 # Special round 3 (not enough history);
                 resp_1     <- which( history[1:4,2] == agent_2[1] & 
@@ -54,8 +54,8 @@ check_fitness <- function(history, agents, pay,
                                    );
                 agent_1[3] <- agents[[foc]][resp_1];
                 agent_2[3] <- agents[[opp]][resp_2];
-                payoff1[3] <- PD(agent_1[3], agent_2[3]);
-                payoff2[3] <- PD(agent_2[3], agent_1[3]);
+                payoff1[3] <- PD(agent_1[3], agent_2[3], pay);
+                payoff2[3] <- PD(agent_2[3], agent_1[3], pay);
             
                 # Remaining rounds (enough history for complete memory);
                 for(round in 4:rounds){
@@ -72,8 +72,8 @@ check_fitness <- function(history, agents, pay,
                                        );        
                     agent_1[round] <- agents[[foc]][resp_1];
                     agent_2[round] <- agents[[opp]][resp_2];
-                    payoff1[round] <- PD(agent_1[round], agent_2[round]);
-                    payoff2[round] <- PD(agent_2[round], agent_1[round]);
+                    payoff1[round] <- PD(agent_1[round], agent_2[round], pay);
+                    payoff2[round] <- PD(agent_2[round], agent_1[round], pay);
                 }
                 foc_score[opps] <- sum(payoff1);
             }
@@ -85,4 +85,21 @@ check_fitness <- function(history, agents, pay,
 
 run_fitness <- function(HISTORY, AGENTS, PARAMETERS){
     .Call("fitness", HISTORY, AGENTS, PARAMETERS);   
+}
+
+PD <- function(a1_play, a2_play, payoffs){
+  points <- 0;
+  if(a1_play == 0 & a2_play == 0){
+    points <- payoffs[1];
+  }
+  if(a1_play == 0 & a2_play == 1){
+    points <- payoffs[2];
+  }
+  if(a1_play == 1 & a2_play == 0){
+    points <- payoffs[3];
+  }
+  if(a1_play == 1 & a2_play == 1){
+    points <- payoffs[4];
+  }
+  return(points);
 }
