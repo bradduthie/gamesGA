@@ -92,5 +92,5 @@ games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE,
     colnames(summ_geno) <- summ_geno[1,];
     summ_geno <- summ_geno[-1,];
     
-    return(summ_geno);
+    return(list(genos=summ_geno, fitness = MEAN_FITNESS));
 }
