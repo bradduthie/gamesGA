@@ -32,4 +32,10 @@ To run the genetic algorithm and find strategies that evolve in a classical [Pri
 games_ga(CC = 3, DC = 4, CD = -1, DD = 0)
 ```
 
+## Run from your browser
+
+The program gamesGA can also be run through a browser via [shiny](https://shiny.rstudio.com/). To do this, simply click the link below, which will redirect to a page that runs the application from the web.
+
+> https://bradduthie.shinyapps.io/gameGA_browser/
+
 For further assistance, contact brad.duthie@gmail.com.
