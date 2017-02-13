@@ -28,7 +28,7 @@
 # R CMD SHLIB -o fitness.so fitness.c
 # CC = 3, DC = 4, CD = -1, DD = 0 : usually results in cooperation
 
-games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE, 
+games_ga <- function(CC = 3, CD = -1, DC = 4, DD = 0, callC = TRUE, 
                      generations = 20, rounds = 100, num_opponents = 10,
                      cross_prob = 0.05, mutation_prob = 0.05){
 
@@ -112,6 +112,11 @@ games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE,
     rownames(summ_geno) <- NULL
     colnames(summ_geno) <- summ_geno[1,];
     summ_geno <- summ_geno[-1,];
+    geno_rows <- NULL;
+    for(i in 1:dim(summ_geno)[1]){
+        geno_rows <- c(geno_rows, paste("Strategy",i));
+    }
+    rownames(summ_geno) <- geno_rows;
     
     return(list(genos=summ_geno, fitness = MEAN_FITNESS));
 }
