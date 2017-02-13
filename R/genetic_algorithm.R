@@ -17,21 +17,16 @@
 #' against its opponent before moving on to the next opponent
 #' @param num_opponents The number of randomly selected opponents that a focal
 #' player will play during the course of one generation
-#' @cross_prob A uniform probability of random crossing over for a focal player
-#' with another randomly selected player
-#' @mutation_prob The probability that a given locus will mutate
-#' @return agents The list of agents after crossing over
+#' @param cross_prob A uniform probability of random crossing over for a focal 
+#' player with another randomly selected player
+#' @param mutation_prob The probability that a given locus will mutate
+#' @return A list, the elements of which include: 1. A table of the genomes
+#' of strategies and their frequencies in the population, and 2. The mean
+#' fitness of the population in each generation
 
 # Compile the fitness function with the command below
 # R CMD SHLIB -o fitness.so fitness.c
 # CC = 3, DC = 4, CD = -1, DD = 0 : usually results in cooperation
-
-dyn.load('src/fitness.so');
-source("R/crossover.R");
-source("R/mutation.R");
-source("R/fitness.R");
-source("R/tournament.R");
-source("R/sample_round.R");
 
 games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE, 
                      generations = 20, rounds = 100, num_opponents = 10,
