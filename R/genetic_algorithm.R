@@ -1,10 +1,30 @@
-rm(list=ls(all=TRUE));
+#' Games genetic algorithm: Runs a genetic algorithm that identifies sequential
+#' strategies for maximising payoffs given any two by two symmetrical payoff
+#' matrix. Simulated players remember three rounds into the past.
+#' @param CC The number of points awarded to a focal agent when the focal agent 
+#' and its opponent both cooperate
+#' @param CD The number of points awarded to a focal agent when the focal agent
+#' cooperates and its opponent defects
+#' @param DC The number of points awarded to a focal agent when the focal agent
+#' defects and its opponent cooperates
+#' @param DD The number of points awarded to a focal agent when the focal agent
+#' and its opponent both defect
+#' @param callC Should the function call c to greatly speed the genetic 
+#' algorithm (default is TRUE).
+#' @param generations The number generations the genetic algorithm will run
+#' before returning selected genotypes
+#' @param rounds The number of rounds of the game that a focal player will play
+#' against its opponent before moving on to the next opponent
+#' @param num_opponents The number of randomly selected opponents that a focal
+#' player will play during the course of one generation
+#' @cross_prob A uniform probability of random crossing over for a focal player
+#' with another randomly selected player
+#' @mutation_prob The probability that a given locus will mutate
+#' @return agents The list of agents after crossing over
 
 # Compile the fitness function with the command below
 # R CMD SHLIB -o fitness.so fitness.c
 # CC = 3, DC = 4, CD = -1, DD = 0 : usually results in cooperation
-
-setwd("~/Dropbox/projects/games_genetic_algorithm");
 
 dyn.load('src/fitness.so');
 source("R/crossover.R");
@@ -14,9 +34,13 @@ source("R/tournament.R");
 source("R/sample_round.R");
 
 games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE, 
-                     generations = 100, rounds = 20, num_opponents = 10,
+                     generations = 20, rounds = 100, num_opponents = 10,
                      cross_prob = 0.05, mutation_prob = 0.05){
 
+    if(num_opponents > 100){
+        stop("Number of opponents must be less than or equal to 100");    
+    }
+    
     agents      <- NULL;
     history_vec <- c(0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1,1);
     history     <- matrix(data = history_vec, ncol = 3, byrow = TRUE);
