@@ -14,7 +14,8 @@ source("R/tournament.R");
 source("R/sample_round.R");
 
 games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE, 
-                     generations = 100, rounds = 20, num_opponents = 10){
+                     generations = 100, rounds = 20, num_opponents = 10,
+                     cross_prob = 0.05, mutation_prob = 0.05){
 
     agents      <- NULL;
     history_vec <- c(0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1,1);
@@ -45,9 +46,9 @@ games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE,
 
     while(gen < generations){
     
-        agents  <- crossover(agents = agents, prob = 0.05);
+        agents  <- crossover(agents = agents, prob = cross_prob);
     
-        agents  <- mutation(agents = agents, prob = 0.05);
+        agents  <- mutation(agents = agents, prob = mutation_prob);
     
         fitness <- check_fitness(history = history, agents = agents, 
                                  pay = payoffs, useC = callC, rounds = rounds,
