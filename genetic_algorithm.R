@@ -2,6 +2,7 @@ rm(list=ls(all=TRUE));
 
 # Compile the fitness function with the command below
 # R CMD SHLIB -o fitness.so fitness.c
+# CC = 3, DC = 4, CD = -1, DD = 0 : usually results in cooperation
 
 setwd("~/Dropbox/projects/games_genetic_algorithm");
 
