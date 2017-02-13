@@ -1,7 +1,7 @@
 Package: gamesGA
 Type: Package
 Title: Genetic algorithm for sequential symmetric games 
-Version: 0.0.1
+Version: 1.0
 Author: A. Bradley Duthie
 Maintainer: A. Bradley Duthie <alexander.duthie@stir.ac.uk>
 Description: Finds optimal strategies for sequential symmetric games using a genetic algorithm

@@ -7,7 +7,7 @@
 #'  against
 #' @param rounds The number of rounds that will be played
 #' @return fitness The fitness that each agent accumlated
-check_fitness <- function(history, agents, pay, 
+fitness <- function(history, agents, pay, 
                           num_opponents = 10, rounds = 100, useC = FALSE){
     if(useC == TRUE){
         agent_vec   <- unlist(agents);

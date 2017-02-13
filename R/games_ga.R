@@ -69,9 +69,9 @@ games_ga <- function(CC = 2, CD = 0, DC = 3, DD = 1, callC = TRUE,
     
         agents  <- mutation(agents = agents, prob = mutation_prob);
     
-        fitness <- check_fitness(history = history, agents = agents, 
-                                 pay = payoffs, useC = callC, rounds = rounds,
-                                 num_opponents = num_opponents);
+        fitness <- fitness(history = history, agents = agents, 
+                           pay = payoffs, useC = callC, rounds = rounds,
+                           num_opponents = num_opponents);
     
         agents  <- tournament(agents = agents, fitness = fitness);
     
