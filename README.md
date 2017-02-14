@@ -1,6 +1,6 @@
 # gamesGA
 
-A genetic algorithm for finding optimal strategies in sequential games characterised by two by two symmetric payoff matrices. For example, in the classic case of the [Prisoner's dilemma](https://en.wikipedia.org/wiki/Prisoner's_dilemma), the payoff matrix can be defined below for the scenario in which both players cooperate (**CC**, upper left), the focal player cooperates but the opponent defects (**CD**, upper right), the focal player defects but the opponent cooperates (**DC**, lower left), and both players defect (**DD**, lower right).
+A genetic algorithm for finding adaptive strategies in sequential games characterised by two by two symmetric payoff matrices. For example, in the classic case of the [Prisoner's dilemma](https://en.wikipedia.org/wiki/Prisoner's_dilemma), the payoff matrix can be defined below for the scenario in which both players cooperate (**CC**, upper left), the focal player cooperates but the opponent defects (**CD**, upper right), the focal player defects but the opponent cooperates (**DC**, lower left), and both players defect (**DD**, lower right).
 
 |                         | Opponent cooperates | Opponent defects |
 |-------------------------|---------------------|------------------|
