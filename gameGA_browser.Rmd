@@ -27,11 +27,11 @@ library(rhandsontable)
 inputPanel(
     
     numericInput("CC", label = "CC", 3, width="50%"),
-    numericInput("DC", label = "DC", 4, width="50%"),
-    numericInput("CD", label = "CD", -1, width="50%"),
-    numericInput("DD", label = "DD", 0, width="50%"),
+    numericInput("DC", label = "DC", 5, width="50%"),
+    numericInput("CD", label = "CD", 0, width="50%"),
+    numericInput("DD", label = "DD", 1, width="50%"),
     numericInput("Rnd", label = "Rounds", 100, width="50%"),
-    numericInput("Gen", label = "Generations", 20, width="50%"),
+    numericInput("Gen", label = "Generations", 250, width="50%"),
     numericInput("Cro", label = "Pr(Crossover)", 0.05, width="50%"),
     numericInput("mu", label = "Pr(Mutation)", 0.05, width="50%"),    
     
@@ -79,7 +79,7 @@ A list of all of the inputs that can be used in the embedded application above i
  - `CD` The payoff that the focal player receives if the focal player cooperates but the opponent defects
  - `DD` The payoff that the focal player receives if the focal player and the opponent both defect
  - `Rounds` The number of rounds a focal player plays against each opponent
- - `Generations` The number of generations the genetic algorithm is allowed to run before producing the output of strategies
+ - `Generations` The number of generations the genetic algorithm is allowed to run before producing the output of strategies. By default, **each strategy will compete against all 100 strategies in the population (including itself)**
  - `Pr(Cossover)` The probability that a crossover event occurs at any given locus between a focal player and a randomly selected player in the population
  - `Pr(Mutation)` For each locus of every player, the probability that a mutation occurs in a generation
  
