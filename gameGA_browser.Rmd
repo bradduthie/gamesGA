@@ -92,8 +92,9 @@ renderPlot({
     fitnesses <- gres()[break2:end];
     fitnesses <- as.numeric(fitnesses);
     mean_fit  <- fitnesses / (input$RnD * 100);
+    maxpt     <- max(c(input$CC, input$CD, input$DC, input$DD));
     par(mar=c(5,5,1,1));
-    plot(x = 1:length(mean_fit), y=mean_fit, type="l", ylim=c(0,5), lwd = 3,
+    plot(x = 1:length(mean_fit), y=mean_fit, type="l", ylim=c(0,maxpt), lwd = 3,
         xlab="Generation", ylab = "Mean strategy fitness per round",
          cex.axis=1.5, cex.lab=1.5);
 })
