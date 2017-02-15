@@ -4,8 +4,8 @@ A genetic algorithm for finding adaptive strategies in sequential games characte
 
 |                         | Opponent cooperates | Opponent defects |
 |-------------------------|---------------------|------------------|
-| Focal player cooperates |   **3, 3**          |  **-1, 4**       |
-| Focal player defects    |   **4, -1**         |  **0, 0**        |
+| Focal player cooperates |   **3, 3**          |  **0, 5**       |
+| Focal player defects    |   **5, 0**         |  **1, 1**        |
 
 Note that any *symmetrical* payoff combination is possible in `games_ga()`, as specified by `CC`, `DC`, `CD`, and `DD` (see below).
 
@@ -29,7 +29,7 @@ install_github("bradduthie/gamesGA")
 To run the genetic algorithm and find strategies that evolve in a classical [Prisoner's dilemma](https://en.wikipedia.org/wiki/Prisoner's_dilemma) scenario, run the following:
 
 ```
-games_ga(CC = 3, DC = 4, CD = -1, DD = 0)
+games_ga(CC = 3, DC = 5, CD = 0, DD = 1)
 ```
 
 ## Run from your browser
