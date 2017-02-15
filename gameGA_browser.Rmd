@@ -30,7 +30,7 @@ inputPanel(
     numericInput("DC", label = "DC", 5, width="50%"),
     numericInput("CD", label = "CD", 0, width="50%"),
     numericInput("DD", label = "DD", 1, width="50%"),
-    numericInput("Rnd", label = "Rounds", 100, width="50%"),
+    numericInput("RnD", label = "Rounds", 100, width="50%"),
     numericInput("Gen", label = "Generations", 250, width="50%"),
     numericInput("Cro", label = "Pr(Crossover)", 0.05, width="50%"),
     numericInput("mu", label = "Pr(Mutation)", 0.05, width="50%"),    
