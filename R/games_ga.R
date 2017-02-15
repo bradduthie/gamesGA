@@ -29,7 +29,7 @@
 # CC = 3, DC = 4, CD = -1, DD = 0 : usually results in cooperation
 
 games_ga <- function(CC = 3, CD = -1, DC = 4, DD = 0, callC = TRUE, 
-                     generations = 20, rounds = 100, num_opponents = 10,
+                     generations = 20, rounds = 250, num_opponents = 100,
                      cross_prob = 0.05, mutation_prob = 0.05){
 
     if(num_opponents > 100){

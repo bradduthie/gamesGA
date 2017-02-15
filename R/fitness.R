@@ -21,7 +21,7 @@ fitness <- function(history, agents, pay,
         for(foc in 1:num_agents){
         
             opponents <- sample(x=1:num_agents, size=num_opponents, 
-                                replace=TRUE);
+                                replace=FALSE);
             foc_score <- rep(0, num_opponents);
             
             for(opps in 1:length(opponents)){
