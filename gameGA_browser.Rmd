@@ -17,11 +17,13 @@ library(rhandsontable)
 
 > **The [gameGA](https://github.com/bradduthie/gamesGA) R package simulates a genetic algorithm for finding adaptive strategies in sequentially played rounds of any two by two sequential payoff matrix game iterated between players. Below, the embedded [shiny](https://shiny.rstudio.com/) application recognises user inputs in the `games_ga()` function and returns a table showing surviving strategies and their corresponding frequencies.**
 
-> [See here](#help) for instructions on [inputs](#help) and interpretion of [output](#out). To install the `gamesGA` package, [see here](https://github.com/bradduthie/gamesGA/blob/master/README.md).
+> [See here](#help) for instructions on [inputs](#help) and interpretion of [table](#out) and [figure](#out2) output. To install the `gamesGA` package, [see here](https://github.com/bradduthie/gamesGA/blob/master/README.md).
 
 ********************************************************************************
 
 <br>
+
+**Input variables into the model below**
 
 ```{r, echo=FALSE}
 inputPanel(
@@ -39,28 +41,62 @@ inputPanel(
 )
 ```
 
-<br>
-    
+
+```{r, echo=FALSE}
+gres <- reactive({ 
+     cc <- input$CC;
+     dc <- input$DC;
+     cd <- input$CD;
+     dd <- input$DD;
+     rd <- input$RnD;
+     gn <- input$Gen;
+     co <- input$Cro;
+     mu <- input$mu;
+ 
+     game_res <- games_ga(CC = cc, DC = dc, CD = cd, DD = dd, rounds = rd,
+                          generations = gn, cross_prob = co, 
+                          mutation_prob = mu, num_opponents = 100);     
+     all <- c(game_res$genos, "break_1",
+              rownames(game_res$genos), "break_2",
+              game_res$fitness);
+    })
+```
+
+<br><br>
+
+**Table of evolved strategies**
+
 ```{r, echo=FALSE}
 renderTable({
-    cc <- input$CC;
-    dc <- input$DC;
-    cd <- input$CD;
-    dd <- input$DD;
-    rd <- input$RnD;
-    gn <- input$Gen;
-    co <- input$Cro;
-    mu <- input$mu;
-
-    game_res <- games_ga(CC = cc, DC = dc, CD = cd, DD = dd, rounds = rd,
-                         generations = gn, cross_prob = co, 
-                         mutation_prob = mu, num_opponents = 100); 
-    
-    max_geno <- dim(game_res$genos)[1];
-
-    final_table <- game_res$genos[1:max_geno,];
-    
+      break1   <- which(gres()=="break_1")[1] - 1;
+      break2   <- which(gres()=="break_2")[1] - 1;
+      geno_vec <- gres()[1:break1];
+      geno_row <- gres()[(break1+2):break2];
+      genos    <- matrix(data =  geno_vec, ncol = 10, byrow = FALSE);
+      rownames(genos) <- geno_row;
+      colnames(genos) <- c("CCC", "CCD", "CDC", "CDD", "DCC", "DCD", "DDC",
+                           "DDD", "1st", "Final %");
+      final_table <- genos;
+     
 }, include.rownames=TRUE)
+```
+
+<br><br>
+
+**Mean per round fitness over generations**
+
+```{r, echo = FALSE}
+renderPlot({
+    break2    <- which(gres()=="break_2")[1]+1;
+    end       <- length(gres());
+    fitnesses <- gres()[break2:end];
+    fitnesses <- as.numeric(fitnesses);
+    mean_fit  <- fitnesses / (input$RnD * 100);
+    par(mar=c(5,5,1,1));
+    plot(x = 1:length(mean_fit), y=mean_fit, type="l", ylim=c(0,5), lwd = 3,
+        xlab="Generation", ylab = "Mean strategy fitness per round",
+         cex.axis=1.5, cex.lab=1.5);
+})
 ```
 
 <br>
@@ -98,3 +134,11 @@ Hence, `gamesGA` does not (yet) model non-symmetric payoffs.
 --------------------------------------------------------------------------------
 
 In the above output table, each row corresponds to a unique strategy that is present in the population after `Generations` of simulated evolution. The first eight columns in the table correspond to the response of a focal strategy given the history of an opponent. For example, in the first column, **C C C** corresponds to a history of three previous rounds of an opponent playing **C** (cooperate). The row element in this column therefore indicates the focal strategy's response (**C** cooperation, or **D** defect) if its opponent has coopereated three times in a row. The nineth column indicates the evolved strategy that a focal player adopts for their first round move (for second and third round moves, see how the [code](https://github.com/bradduthie/gamesGA/blob/master/src/fitness.c) handles the reduced information). Finally, the **Final %** column indicates the perecentage of individuals in the population adopting the row strategy.
+
+<a name="out2">Figure output</a>
+--------------------------------------------------------------------------------
+
+The figure above shows the mean number of points a the average strategy accrues *per round* in each generation. For example, if `CC = 3` in a simulation, and all strategies cooperate, then the mean per round fitness will always be 3.
+
+
+
