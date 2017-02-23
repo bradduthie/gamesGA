@@ -63,24 +63,24 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     int loci_number;           /* Total number of loci in each agent */
     double *fitness_ptr;       /* Pointer to the fitnesses of agents */
     double *fitness;           /* Fitnesses of agents */
-    double *agent_1;
-    double *agent_2;
-    double *payoff1;
-    double *payoff2;
-    int num_opponents;
-    int opponent;
-    int rounds;
-    int round;
-    int pay1;
-    int pay2;
-    int pay3;
-    int pay4;
-    int opp;
-    int resp_1;
-    int resp_2;
-    int mem1;
-    int mem2;
-    int mem3;
+    double *agent_1;           /* Temporary vector for agent 1 strategy */
+    double *agent_2;           /* Temporary vector for agent 2 strategy */
+    double *payoff1;           /* Temporary vector for agent 1 payoffs  */
+    double *payoff2;           /* Temporary vector for agent 2 payoffs  */
+    int num_opponents;         /* Number of opponents each agent plays  */
+    int opponent;              /* Index for how many opponents encountered   */
+    int rounds;                /* Number of rounds that are played per opp */
+    int round;                 /* Index for the round being played */
+    int pay1;                  /* Payoff for the upper-left matrix (focal) */
+    int pay2;                  /* Payoff for the upper-right matrix (focal) */
+    int pay3;                  /* Payoff for the lower-left matrix (focal) */
+    int pay4;                  /* Payoff for the lower-right matrix (focal) */
+    int opp;                   /* Index for the opponent of the focal   */
+    int resp_1;                /* Response of the focal agent (choice) */
+    int resp_2;                /* Resonponse of the opponent (choice) */
+    int mem1;                  /* Round in the furthest memory (3 rounds ago) */
+    int mem2;                  /* Round in 2nd furthest memory (2 rounds ago) */
+    int mem3;                  /* Round in most recent memory (1 round ago) */
     
     /* First take care of all the reading in of code from R to C */
     /* ====================================================================== */
