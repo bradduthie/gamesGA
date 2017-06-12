@@ -41,6 +41,7 @@
 #' games_ga(CC = 3, CD = 0, DC = 5, DD = 1, generations = 250, rounds = 100)
 #' @useDynLib gamesGA
 #' @importFrom stats rnorm rpois rbinom runif
+#' @importFrom shiny inputPanel reactive renderTable renderPlot
 #' @export
 
 # Compile the fitness function with the command below
