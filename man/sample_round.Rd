@@ -13,12 +13,16 @@ sample_round(agents, foc_agent, opp_agent, pay, rounds = 100)
 
 \item{opp_agent}{The index of the second agent that will play the game}
 
+\item{pay}{A vector of the payoffs for CC (payoffs[1]), CD (payoffs[2]),
+DC (payoffs[3]) and DD (payoffs[4]) combinations of play choices from the
+focal player and the opponent}
+
 \item{rounds}{The number of rounds that the agents will play the game}
 }
 \value{
 round_hist The history of the game played between both agents
 }
 \description{
-Function that simulates a sequence of rounds of a game played between two 
-selected agents
+This funciton simulates a sequence of rounds of a game played between two 
+selected agents.
 }

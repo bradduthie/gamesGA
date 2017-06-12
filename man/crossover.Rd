@@ -15,6 +15,6 @@ crossover(agents, prob = 0.1)
 agents The list of agents after crossing over
 }
 \description{
-Function that causes uniform crossing over among loci in a population of 
-agents
+This function causes uniform crossing over among loci in a population of 
+agents.
 }

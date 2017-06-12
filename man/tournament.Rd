@@ -16,6 +16,6 @@ element in the vector identifies a single agent's fitness}
 agents A new list of agents selected according to fitness
 }
 \description{
-Function that simulates selection of next generation of agents according to
-their fitness
+This function simulates selection of next generation of agents according to
+their fitness.
 }

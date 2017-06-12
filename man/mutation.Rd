@@ -15,5 +15,5 @@ mutation(agents, prob = 0.01)
 agents The list of agents after mutation
 }
 \description{
-Function that causes alleles to mutate in agents
+This function causes alleles to mutate in agents.
 }

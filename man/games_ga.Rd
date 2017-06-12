@@ -54,9 +54,9 @@ one player is the number of points accrued over all rounds and opponents in a
 generation.
 }
 \description{
-Runs a genetic algorithm that identifies sequential strategies for
-maximising payoffs given any two by two symmetrical payoff matrix. Simulated
-players remember three rounds into the past.
+This function runs a genetic algorithm that identifies sequential strategies 
+for maximising payoffs given any two by two symmetrical payoff matrix. 
+Simulated players remember three rounds into the past.
 }
 \examples{
 games_ga(CC = 3, CD = 0, DC = 5, DD = 1, generations = 250, rounds = 100)

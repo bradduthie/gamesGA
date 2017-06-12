@@ -11,6 +11,10 @@ fitness(history, agents, payoffs, num_opponents, rounds, useC)
 
 \item{agents}{A list of agents whose fitness will be assessed}
 
+\item{payoffs}{A vector of the payoffs for CC (payoffs[1]), CD (payoffs[2]),
+DC (payoffs[3]) and DD (payoffs[4]) combinations of play choices from the
+focal player and the opponent}
+
 \item{num_opponents}{The number of random opponents to match the focal agent
 against}
 
@@ -24,6 +28,7 @@ fitness A vector in which elements correspond to the accumlated
 fitness (payoffs) of each agent
 }
 \description{
-Assess the fitness of each strategy through the use of a sequential game
-between each focal strategy and a fixed number of random opponents
+This function assesses the fitness of each strategy through the use of a 
+sequential game between each focal strategy and a fixed number of random 
+opponents.
 }
