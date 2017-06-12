@@ -15,7 +15,10 @@
 #' of points accrued over all rounds and opponents in a generation.
 #'@useDynLib gamesGA
 #'@importFrom stats rnorm rpois rbinom runif
-#'@importFrom shiny inputPanel reactive renderTable renderPlot
+#'@importFrom shiny inputPanel reactive renderTable renderPlot shinyUI fluidPage
+#'    titlePanel br fluidRow h2 h4 mainPanel numericInput plotOutput runApp
+#'    shinyApp shinyServer tableOutput
+#'@importFrom graphics abline axis image mtext par plot points
 #'@export
 #'
 
