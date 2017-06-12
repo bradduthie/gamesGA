@@ -1,6 +1,9 @@
+#' 
 #' Sample round function
+#' 
 #' Function that simulates a sequence of rounds of a game played between two 
 #' selected agents
+#' 
 #' @param agents A list of agents
 #' @param foc_agent The index of the first agent that will play the game
 #' @param opp_agent The index of the second agent that will play the game

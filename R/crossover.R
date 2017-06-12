@@ -1,4 +1,6 @@
+#' 
 #' Crossover function
+#' 
 #' Function that causes uniform crossing over among loci in a population of 
 #' agents
 #' @param agents A list of agents on which crossing over will be performed

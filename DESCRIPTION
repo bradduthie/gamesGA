@@ -8,3 +8,4 @@ Description: Finds optimal strategies for sequential symmetric games using a gen
 License: Unlicensed and private for the moment
 LazyData: TRUE
 RoxygenNote: 6.0.1
+Suggests: testthat

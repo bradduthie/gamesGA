@@ -1,5 +1,8 @@
+#' 
 #' Mutation function
+#' 
 #' Function that causes alleles to mutate in agents
+#' 
 #' @param agents A list of agents on which mutation will occur
 #' @param prob The probability that a mutation will occur for any locus
 #' @return agents The list of agents after mutation

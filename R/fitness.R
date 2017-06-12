@@ -1,6 +1,9 @@
+#' 
 #' Fitness function
+#' 
 #' Assess the fitness of each strategy through the use of a sequential game
 #' between each focal strategy and a fixed number of random opponents
+#' 
 #' @param history A table of all possible prior moves of agents in sequence
 #' @param agents A list of agents whose fitness will be assessed
 #' @param num_opponents The number of random opponents to match the focal agent

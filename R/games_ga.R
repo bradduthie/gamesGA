@@ -1,6 +1,10 @@
-#' Games genetic algorithm: Runs a genetic algorithm that identifies sequential
-#' strategies for maximising payoffs given any two by two symmetrical payoff
-#' matrix. Simulated players remember three rounds into the past.
+#' 
+#' Games genetic algorithm: 
+#' 
+#' Runs a genetic algorithm that identifies sequential strategies for
+#' maximising payoffs given any two by two symmetrical payoff matrix. Simulated
+#' players remember three rounds into the past.
+#' 
 #' @param CC The number of points awarded to a focal agent when the focal agent 
 #' and its opponent both cooperate
 #' @param CD The number of points awarded to a focal agent when the focal agent

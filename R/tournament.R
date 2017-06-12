@@ -1,6 +1,9 @@
+#' 
 #' Tournament function
+#' 
 #' Function that simulates selection of next generation of agents according to
 #' their fitness
+#' 
 #' @param agents A list of agents to be assessed by fitness
 #' @param fitness The fitness vector on which agents will be assessed
 #' @return agents A new list of agents selected according to fitness
