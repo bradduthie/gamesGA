@@ -2,26 +2,23 @@
 % Please edit documentation in R/sample_round.R
 \name{sample_round}
 \alias{sample_round}
-\title{Sample round function
-Function that simulates a sequence of rounds of a game played between two 
-selected agents}
+\title{Sample round function}
 \usage{
-sample_round(agents, foc_agent, opp_agent, rounds = 100)
+sample_round(agents, foc_agent, opp_agent, pay, rounds = 100)
 }
 \arguments{
-\item{agents}{A list of agents}
+\item{agents}{A list of agents, two of which will play the game}
 
 \item{foc_agent}{The index of the first agent that will play the game}
 
 \item{opp_agent}{The index of the second agent that will play the game}
 
-\item{rounds}{The number of rounds that the agents will play}
+\item{rounds}{The number of rounds that the agents will play the game}
 }
 \value{
 round_hist The history of the game played between both agents
 }
 \description{
-Sample round function
 Function that simulates a sequence of rounds of a game played between two 
 selected agents
 }

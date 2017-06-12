@@ -2,8 +2,7 @@
 % Please edit documentation in R/mutation.R
 \name{mutation}
 \alias{mutation}
-\title{Mutation function
-Function that causes alleles to mutate in agents}
+\title{Mutation function}
 \usage{
 mutation(agents, prob = 0.01)
 }
@@ -16,6 +15,5 @@ mutation(agents, prob = 0.01)
 agents The list of agents after mutation
 }
 \description{
-Mutation function
 Function that causes alleles to mutate in agents
 }

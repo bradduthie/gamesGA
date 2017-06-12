@@ -2,9 +2,7 @@
 % Please edit documentation in R/crossover.R
 \name{crossover}
 \alias{crossover}
-\title{Crossover function
-Function that causes uniform crossing over among loci in a population of 
-agents}
+\title{Crossover function}
 \usage{
 crossover(agents, prob = 0.1)
 }
@@ -17,7 +15,6 @@ crossover(agents, prob = 0.1)
 agents The list of agents after crossing over
 }
 \description{
-Crossover function
 Function that causes uniform crossing over among loci in a population of 
 agents
 }

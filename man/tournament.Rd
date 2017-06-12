@@ -2,22 +2,20 @@
 % Please edit documentation in R/tournament.R
 \name{tournament}
 \alias{tournament}
-\title{Tournament function
-Function that simulates selection of next generation of agents according to
-their fitness}
+\title{Tournament function}
 \usage{
 tournament(agents, fitness)
 }
 \arguments{
 \item{agents}{A list of agents to be assessed by fitness}
 
-\item{fitness}{The fitness vector on which agents will be assessed}
+\item{fitness}{The fitness vector on which agents will be assessed. Each
+element in the vector identifies a single agent's fitness}
 }
 \value{
 agents A new list of agents selected according to fitness
 }
 \description{
-Tournament function
 Function that simulates selection of next generation of agents according to
 their fitness
 }
