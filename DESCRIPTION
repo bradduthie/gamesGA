@@ -2,7 +2,8 @@ Package: gamesGA
 Type: Package
 Title: Genetic algorithm for sequential symmetric games 
 Version: 1.1.0.0
-Imports: grDevices (>= 3.3.3), graphics (>= 3.3.3), stats (>= 3.3.3)
+Imports: grDevices (>= 3.3.3), graphics (>= 3.3.3), stats (>= 3.3.3), 
+    shiny (>= 1.0.0)
 Author: person("A. Bradley", "Duthie", email = "brad.duthie@gmail.com", 
     role = c("aut", "cre"))
 Maintainer: A. Bradley Duthie <alexander.duthie@stir.ac.uk>
