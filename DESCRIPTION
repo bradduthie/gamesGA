@@ -1,11 +1,21 @@
 Package: gamesGA
 Type: Package
 Title: Genetic algorithm for sequential symmetric games 
-Version: 1.0
-Author: A. Bradley Duthie
+Version: 1.1.0.0
+Imports: grDevices (>= 3.3.3), graphics (>= 3.3.3), stats (>= 3.3.3)
+Author: person("A. Bradley", "Duthie", email = "brad.duthie@gmail.com", 
+    role = c("aut", "cre"))
 Maintainer: A. Bradley Duthie <alexander.duthie@stir.ac.uk>
-Description: Finds optimal strategies for sequential symmetric games using a genetic algorithm
-License: Unlicensed and private for the moment
+Description: This package finds optimal strategies for sequential symmetric 
+    games using a genetic algorithm. Currently, any symmetric two by two matrix
+    is allowed, and strategies can remember the history of an opponent's play
+    from the previous three rounds of moves in iterated interactions between
+    players. The genetic algorithm returns a list of adaptive strategies given
+    payoffs, and the mean fitness of strategies in each generation.
+URL: https://bradduthie.github.io/gamesGA/
+BugReports: https://github.com/bradduthie/gamesGA/issues
+Depends: R (>= 3.3.3)
+License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 6.0.1
 Suggests: testthat
