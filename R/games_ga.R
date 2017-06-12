@@ -1,9 +1,9 @@
 #' 
 #' Games genetic algorithm: 
 #' 
-#' Runs a genetic algorithm that identifies sequential strategies for
-#' maximising payoffs given any two by two symmetrical payoff matrix. Simulated
-#' players remember three rounds into the past.
+#' This function runs a genetic algorithm that identifies sequential strategies 
+#' for maximising payoffs given any two by two symmetrical payoff matrix. 
+#' Simulated players remember three rounds into the past.
 #' 
 #' @param CC The number of points awarded to a focal agent when the focal agent 
 #' and its opponent both cooperate
@@ -13,20 +13,35 @@
 #' defects and its opponent cooperates
 #' @param DD The number of points awarded to a focal agent when the focal agent
 #' and its opponent both defect
-#' @param callC Should the function call c to greatly speed the genetic 
-#' algorithm (default is TRUE).
-#' @param generations The number generations the genetic algorithm will run
-#' before returning selected genotypes
+#' @param callC Whether or not the function calls c in the genetic algorithm. 
+#' While not calling c is an option, the default value is TRUE because using the
+#' compiled c code greatly speeds up the genetic algorithm, making the whole
+#' program run much faster
+#' @param generations The number of generations the genetic algorithm will run
+#' before returning selected genotypes and fitness history. Each generation 
+#' includes some number of rounds of the game that each strategy will play
 #' @param rounds The number of rounds of the game that a focal player will play
-#' against its opponent before moving on to the next opponent
+#' against its opponent before moving on to the next opponent. Rounds are played
+#' iteratively against opponents, allowing the history of interactions to affect
+#' strategies and therefore total payoffs after all rounds are completed
 #' @param num_opponents The number of randomly selected opponents that a focal
-#' player will play during the course of one generation
-#' @param cross_prob A uniform probability of random crossing over for a focal 
-#' player with another randomly selected player
-#' @param mutation_prob The probability that a given locus will mutate
+#' player will play during the course of one generation; the focal player will
+#' play in the same number of rounds with each opponent
+#' @param cross_prob A uniform probability of random crossing over event for a 
+#' focal player's locus with the same locus from another randomly selected 
+#' player.
+#' @param mutation_prob The probability that a given locus will mutate; mutation
+#' from `C` to `D` occurs with the same probability as `D` to `C` (no bias)
 #' @return A list, the elements of which include: 1. A table of the genomes
-#' of strategies and their frequencies in the population, and 2. The mean
-#' fitness of the population in each generation
+#' of strategies and their frequencies in the population and 2. The mean
+#' fitness calculated over all players population in each generation. Fitness of
+#' one player is the number of points accrued over all rounds and opponents in a
+#' generation.
+#' @examples
+#' games_ga(CC = 3, CD = 0, DC = 5, DD = 1, generations = 250, rounds = 100)
+#' @useDynLib gamesGA
+#' @importFrom stats rnorm rpois rbinom runif
+#' @export
 
 # Compile the fitness function with the command below
 # R CMD SHLIB -o fitness.so fitness.c

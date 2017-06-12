@@ -1,14 +1,18 @@
 #' 
 #' Sample round function
 #' 
-#' Function that simulates a sequence of rounds of a game played between two 
-#' selected agents
+#' This funciton simulates a sequence of rounds of a game played between two 
+#' selected agents.
 #' 
-#' @param agents A list of agents
+#' @param agents A list of agents, two of which will play the game
 #' @param foc_agent The index of the first agent that will play the game
 #' @param opp_agent The index of the second agent that will play the game
-#' @param rounds The number of rounds that the agents will play
+#' @param pay A vector of the payoffs for CC (payoffs[1]), CD (payoffs[2]),
+#' DC (payoffs[3]) and DD (payoffs[4]) combinations of play choices from the
+#' focal player and the opponent
+#' @param rounds The number of rounds that the agents will play the game
 #' @return round_hist The history of the game played between both agents
+#' @export
 sample_round <- function(agents, foc_agent, opp_agent, pay, rounds = 100){
     
     history_vec <- c(0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1,1);

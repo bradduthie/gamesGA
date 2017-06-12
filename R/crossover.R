@@ -1,11 +1,13 @@
 #' 
 #' Crossover function
 #' 
-#' Function that causes uniform crossing over among loci in a population of 
-#' agents
+#' This function causes uniform crossing over among loci in a population of 
+#' agents.
+#' 
 #' @param agents A list of agents on which crossing over will be performed
 #' @param prob The probability that crossing over happens at a locus
 #' @return agents The list of agents after crossing over
+#' @export
 crossover <- function(agents, prob = 0.1){
     for(i in 1:length(agents)){
         cross <- runif(n=length(agents[[i]]));

@@ -1,12 +1,14 @@
 #' 
 #' Tournament function
 #' 
-#' Function that simulates selection of next generation of agents according to
-#' their fitness
+#' This function simulates selection of next generation of agents according to
+#' their fitness.
 #' 
 #' @param agents A list of agents to be assessed by fitness
-#' @param fitness The fitness vector on which agents will be assessed
+#' @param fitness The fitness vector on which agents will be assessed. Each
+#' element in the vector identifies a single agent's fitness
 #' @return agents A new list of agents selected according to fitness
+#' @export
 tournament <- function(agents, fitness){
     sum_fit    <- lapply(X = fitness, FUN = sum);
     tot_fit    <- unlist(sum_fit);

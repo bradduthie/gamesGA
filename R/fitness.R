@@ -1,15 +1,23 @@
 #' 
 #' Fitness function
 #' 
-#' Assess the fitness of each strategy through the use of a sequential game
-#' between each focal strategy and a fixed number of random opponents
+#' This function assesses the fitness of each strategy through the use of a 
+#' sequential game between each focal strategy and a fixed number of random 
+#' opponents.
 #' 
 #' @param history A table of all possible prior moves of agents in sequence
 #' @param agents A list of agents whose fitness will be assessed
+#' @param payoffs A vector of the payoffs for CC (payoffs[1]), CD (payoffs[2]),
+#' DC (payoffs[3]) and DD (payoffs[4]) combinations of play choices from the
+#' focal player and the opponent
 #' @param num_opponents The number of random opponents to match the focal agent
 #'  against
 #' @param rounds The number of rounds that will be played
-#' @return fitness The fitness that each agent accumlated
+#' @param useC A TRUE or FALSE value that determines whether or not c will be
+#' called to calculate agent fitnesses
+#' @return fitness A vector in which elements correspond to the accumlated
+#' fitness (payoffs) of each agent
+#' @export
 fitness <- function(history, agents, payoffs, num_opponents, rounds, useC){
     pay <- payoffs;
     if(useC == TRUE){
@@ -90,6 +98,21 @@ run_fitness <- function(HISTORY, AGENTS, PARAMETERS){
     .Call("fitness", HISTORY, AGENTS, PARAMETERS);   
 }
 
+#' 
+#' PD function
+#' 
+#' Returns the number of points (payoff) that a focal player accumlates from one
+#' round of a game with an opponent given a payoff vector given a decision "C"
+#' or "D" for each player
+#' 
+#' @param a1_play The play choice of the focal player (0 or 1)
+#' @param a2_play The play choice of the opponent player (0 or 1)
+#' @param payoffs A vector of payoffs (length = 4) to the focal player as a 
+#' consequence of both players playing 0 (payoffs[1]), the focal player only
+#' playing 0 (payoffs[2]), the focal player only playing 1 (payoffs[3]), and
+#' both players playing 1 (payoffs[4])
+#' @return fitness The payoff to the focal player (points accumulated from the
+#' interaction)
 PD <- function(a1_play, a2_play, payoffs){
   points <- 0;
   if(a1_play == 0 & a2_play == 0){
