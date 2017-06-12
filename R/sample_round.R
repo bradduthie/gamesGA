@@ -9,7 +9,11 @@
 #' @param opp_agent The index of the second agent that will play the game
 #' @param rounds The number of rounds that the agents will play
 #' @return round_hist The history of the game played between both agents
-sample_round <- function(agents, foc_agent, opp_agent, rounds = 100){
+sample_round <- function(agents, foc_agent, opp_agent, pay, rounds = 100){
+    
+    history_vec <- c(0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1,1);
+    history     <- matrix(data = history_vec, ncol = 3, byrow = TRUE);
+    
     agent_1 <- rep(0, rounds);
     agent_2 <- rep(0, rounds);
     payoff1 <- rep(0, rounds);
@@ -18,16 +22,16 @@ sample_round <- function(agents, foc_agent, opp_agent, rounds = 100){
     # Special round 1 (not enough history);
     agent_1[1] <- agents[[foc_agent]][9]; # First turn
     agent_2[1] <- agents[[opp_agent]][9];
-    payoff1[1] <- PD(agent_1[1], agent_2[1]);
-    payoff2[1] <- PD(agent_2[1], agent_1[1]);
+    payoff1[1] <- PD(agent_1[1], agent_2[1], pay);
+    payoff2[1] <- PD(agent_2[1], agent_1[1], pay);
     
     # Special round 2 (not enough history);
     resp_1     <- which(history[1:2,3] == agent_2[1]);
     resp_2     <- which(history[1:2,3] == agent_1[1]);
     agent_1[2] <- agents[[foc_agent]][resp_1];
     agent_2[2] <- agents[[opp_agent]][resp_2];
-    payoff1[2] <- PD(agent_1[2], agent_2[2]);
-    payoff2[2] <- PD(agent_1[2], agent_2[2]);
+    payoff1[2] <- PD(agent_1[2], agent_2[2], pay);
+    payoff2[2] <- PD(agent_1[2], agent_2[2], pay);
     
     # Special round 3 (not enough history);
     resp_1     <- which( history[1:4,2] == agent_2[1] & 
@@ -38,8 +42,8 @@ sample_round <- function(agents, foc_agent, opp_agent, rounds = 100){
                        );
     agent_1[3] <- agents[[foc_agent]][resp_1];
     agent_2[3] <- agents[[opp_agent]][resp_2];
-    payoff1[3] <- PD(agent_1[3], agent_2[3]);
-    payoff2[3] <- PD(agent_1[3], agent_2[3]);
+    payoff1[3] <- PD(agent_1[3], agent_2[3], pay);
+    payoff2[3] <- PD(agent_1[3], agent_2[3], pay);
     
     # Remaining rounds (enough history for complete memory);
     for(round in 4:rounds){
@@ -56,8 +60,8 @@ sample_round <- function(agents, foc_agent, opp_agent, rounds = 100){
         );        
         agent_1[round] <- agents[[foc_agent]][resp_1];
         agent_2[round] <- agents[[opp_agent]][resp_2];
-        payoff1[round] <- PD(agent_1[round], agent_2[round]);
-        payoff2[round] <- PD(agent_2[round], agent_1[round]);
+        payoff1[round] <- PD(agent_1[round], agent_2[round], pay);
+        payoff2[round] <- PD(agent_2[round], agent_1[round], pay);
     }
     
     round_hist <- data.frame(agent_1, agent_2, payoff1, payoff2);
