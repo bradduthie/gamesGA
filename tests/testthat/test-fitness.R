@@ -17,6 +17,8 @@ for(i in 1:10){
 ref_fits_c <- c(51, 64,  177, 168, 156, 192, 153, 117, 168, 176);
 ref_fits_R <- c(54, 112, 171, 173, 218, 246, 247, 282, 337, 384);
 
+payoffs <- c(3, 0, 5, 1);
+
 test_that("Equal fitnesses (c call) for the same strategies", {
     expect_equal( fitness( history       = history,
                            agents        = agents,
