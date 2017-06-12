@@ -50,7 +50,6 @@ SEXP fitness(SEXP HISTORY, SEXP AGENTS, SEXP PARAMETERS){
     int *dim_HISTORY;          /* Dimensions of the HISTORY array incoming */
     int *dim_AGENTS;           /* Dimensions of the AGENTS array incoming */
     int vec_pos;               /* Vector position for making arrays */
-    double *paras;             /* Pointer to PARAMETER (interface R and C) */
     double **agents;           /* Array of agents */
     double **history;          /* Array of history */
     int foc;                   /* Index for a focal agent */
