@@ -7,7 +7,7 @@ Imports: grDevices (>= 3.3.3), graphics (>= 3.3.3), stats (>= 3.3.3),
 Author: person("A. Bradley", "Duthie", email = "brad.duthie@gmail.com", 
     role = c("aut", "cre"))
 Maintainer: A. Bradley Duthie <alexander.duthie@stir.ac.uk>
-Description: Finds optimal strategies for sequential symmetric 
+Description: Finds adaptive strategies for sequential symmetric 
     games using a genetic algorithm. Currently, any symmetric two by two matrix
     is allowed, and strategies can remember the history of an opponent's play
     from the previous three rounds of moves in iterated interactions between
