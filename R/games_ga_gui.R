@@ -8,7 +8,7 @@
 #' strategy fitness over generations of the genetic algorithm. No arguments are
 #' required (or available) for this function -- it only launces the GUI.
 #' 
-#'@return A table (visible in a browswer), the elements of which include: 
+#'@return A table (visible in a browser), the elements of which include: 
 #' 1. A table of the genomes of strategies and their frequencies in the 
 #' population and 2. A plot showing the mean fitness calculated over all players 
 #' in the population in each generation. The fitness of one player is the number 
