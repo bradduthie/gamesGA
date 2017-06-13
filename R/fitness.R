@@ -18,7 +18,7 @@
 #' @return fitness A vector in which elements correspond to the accumlated
 #' fitness (payoffs) of each agent
 #' @export
-fitness <- function(history, agents, payoffs, num_opponents, rounds, useC){
+get_fitness <- function(history, agents, payoffs, num_opponents, rounds, useC){
     pay <- payoffs;
     if(useC == TRUE){
         agent_vec   <- unlist(agents);

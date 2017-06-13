@@ -20,50 +20,50 @@ ref_fits_R <- c(54, 112, 171, 173, 218, 246, 247, 282, 337, 384);
 payoffs <- c(3, 0, 5, 1);
 
 test_that("Equal fitnesses (c call) for the same strategies", {
-    expect_equal( fitness( history       = history,
-                           agents        = agents,
-                           pay           = payoffs,
-                           useC          = TRUE,
-                           rounds        = 10,
-                           num_opponents = 10
-                           ), 
-                  rep(x = 300, times = 10))
+    expect_equal( get_fitness( history       = history,
+                               agents        = agents,
+                               pay           = payoffs,
+                               useC          = TRUE,
+                               rounds        = 10,
+                               num_opponents = 10
+                             ), 
+                             rep(x = 300, times = 10))
 })
 
 test_that("Equal fitnesses (R call) for the same strategies", {
-    expect_equal( fitness( history       = history,
-                           agents        = agents,
-                           pay           = payoffs,
-                           useC          = FALSE,
-                           rounds        = 10,
-                           num_opponents = 10
-    ), 
-    rep(x = 300, times = 10))
+    expect_equal( get_fitness( history       = history,
+                               agents        = agents,
+                               pay           = payoffs,
+                               useC          = FALSE,
+                               rounds        = 10,
+                               num_opponents = 10
+                             ), 
+                             rep(x = 300, times = 10))
 })
 
 
 test_that("Increasing fitnesses (c call) for better strategies", {
     set.seed(1);
-    expect_equal( fitness( history       = history,
-                           agents        = agents2,
-                           pay           = payoffs,
-                           useC          = TRUE,
-                           rounds        = 10,
-                           num_opponents = 10
-    ), 
-    ref_fits_c)
+    expect_equal( get_fitness( history       = history,
+                               agents        = agents2,
+                               pay           = payoffs,
+                               useC          = TRUE,
+                               rounds        = 10,
+                               num_opponents = 10
+                             ), 
+                             ref_fits_c)
 })
 
 test_that("Increasing fitnesses (R call) for better strategies", {
     set.seed(1);    
-    expect_equal( fitness( history       = history,
-                           agents        = agents2,
-                           pay           = payoffs,
-                           useC          = FALSE,
-                           rounds        = 10,
-                           num_opponents = 10
-    ), 
-    ref_fits_R)
+    expect_equal( get_fitness( history       = history,
+                               agents        = agents2,
+                               pay           = payoffs,
+                               useC          = FALSE,
+                               rounds        = 10,
+                               num_opponents = 10
+                             ), 
+                             ref_fits_R)
 })
 
 set.seed(Sys.time())

@@ -38,8 +38,8 @@
 #' one player is the number of points accrued over all rounds and opponents in a
 #' generation.
 #' @examples
-#' games_ga(CC = 3, CD = 0, DC = 5, DD = 1, generations = 250, rounds = 100)
-#' @useDynLib gamesGA
+#' games_ga(CC = 3, CD = 0, DC = 5, DD = 1, generations = 100, rounds = 100)
+#' @useDynLib gamesGA, .registration = TRUE
 #' @importFrom stats rnorm rpois rbinom runif
 #' @importFrom shiny inputPanel reactive renderTable renderPlot
 #' @export
@@ -89,9 +89,9 @@ games_ga <- function(CC = 3, CD = 0, DC = 5, DD = 1, callC = TRUE,
     
         agents  <- mutation(agents = agents, prob = mutation_prob);
     
-        fitness <- fitness(history = history, agents = agents, 
-                           pay = payoffs, useC = callC, rounds = rounds,
-                           num_opponents = num_opponents);
+        fitness <- get_fitness(history = history, agents = agents, 
+                               payoffs = payoffs, useC   = callC, 
+                               rounds  = rounds, num_opponents = num_opponents);
     
         agents  <- tournament(agents = agents, fitness = fitness);
     
