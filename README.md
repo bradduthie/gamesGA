@@ -11,7 +11,17 @@ Note that any *symmetrical* payoff combination is possible in `games_ga()`, as s
 
 ## Installation and use
 
-To install this package, make sure that the `devtools` library is installed.
+**Install with GitHub**
+
+To install [this package](https://cran.r-project.org/web/packages/gamesGA/) from CRAN.
+
+```
+install.packages("gamesGA")
+```
+
+**Install with GitHub**
+
+To install this package from GitHub, make sure that the `devtools` library is installed.
 
 ```
 install.packages("devtools")
@@ -34,7 +44,13 @@ games_ga(CC = 3, DC = 5, CD = 0, DD = 1)
 
 ## Run from your browser
 
-The program gamesGA can also be run through a browser via [shiny](https://shiny.rstudio.com/). To do this, simply click the link below, which will redirect to a page that runs the application from the web.
+The program gamesGA can also be run through a browser via [shiny](https://shiny.rstudio.com/). To do this, run the `games_ga_gui()` function.
+
+```
+games_ga_gui()
+```
+
+Alternatively, the following link redirects to a page that runs the application from the web.
 
 > https://bradduthie.shinyapps.io/gameGA_browser/
 
