@@ -11,7 +11,7 @@ Note that any *symmetrical* payoff combination is possible in `games_ga()`, as s
 
 ## Installation and use
 
-**Install with GitHub**
+**Install from CRAN**
 
 To install [this package](https://cran.r-project.org/web/packages/gamesGA/) from CRAN.
 
