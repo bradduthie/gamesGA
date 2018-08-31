@@ -7,16 +7,4 @@
 
 
 # R CMD check results
-There were no ERRORs or WARNINGs.
-
-* There was 1 NOTE:
-  * checking CRAN incoming feasibility ... NOTE
-    Maintainer: ‘A. Bradley Duthie <alexander.duthie@stir.ac.uk>’
-
-    New submission
-
-    License components with restrictions and base license permitting such:
-      MIT + file LICENSE
-    File 'LICENSE':
-    YEAR: 2017
-    COPYRIGHT HOLDER: A. Bradley Duthie <brad.duthie@gmail.com>
+There were no ERRORs, WARNINGs, or NOTEs.

@@ -1,13 +1,13 @@
 Package: gamesGA
 Type: Package
 Title: Genetic Algorithm for Sequential Symmetric Games
-Version: 1.1.3.3
+Version: 1.1.3.5
 Imports: grDevices (>= 3.4.0), graphics (>= 3.4.0), stats (>= 3.4.0), 
     shiny (>= 1.0.0)
 Authors@R: person("A. Bradley", "Duthie", email = "brad.duthie@gmail.com", 
                   role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0001-8343-4995"))
-Maintainer: A. Bradley Duthie <alexander.duthie@stir.ac.uk>
+Maintainer: A. Bradley Duthie <brad.duthie@gmail.com>
 Description: Finds adaptive strategies for sequential symmetric 
     games using a genetic algorithm. Currently, any symmetric two by two matrix
     is allowed, and strategies can remember the history of an opponent's play

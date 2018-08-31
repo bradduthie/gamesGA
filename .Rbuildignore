@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+README.md
+NEWS.md
+cran_comments.md
+gameGA_browser.Rmd
+index.md
+rsconnect
+LICENSE.md
