@@ -21,7 +21,6 @@
 #'@importFrom graphics abline axis image mtext par plot points
 #'@export
 #'
-
 games_ga_gui <- function(){
     
     ui <- shinyUI(fluidPage(

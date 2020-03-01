@@ -56,18 +56,17 @@ games_ga <- function(CC = 3, CD = 0, DC = 5, DD = 1, callC = TRUE,
         stop("Number of opponents must be less than or equal to 100");    
     }
     
-    agents      <- NULL;
+    agents      <- list();
     history_vec <- c(0,0,0,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,1,1,0,1,1,1);
     history     <- matrix(data = history_vec, ncol = 3, byrow = TRUE);
     hist_pretty <- history;
     
     hist_pretty[hist_pretty==0]   <- "C";
     hist_pretty[hist_pretty=="1"] <- "D";
-    hist_print                    <- NULL;
+    hist_print                    <- rep(x = NA, length = dim(hist_pretty)[1]);
     
     for(i in 1:dim(hist_pretty)[1]){
-        row        <- paste(hist_pretty[i,], collapse=" ");
-        hist_print <- c(hist_print, row);
+        hist_print[i]  <- paste(hist_pretty[i,], collapse = " ");
     }
     hist_print <- c(hist_print, "1st");
 
@@ -77,9 +76,8 @@ games_ga <- function(CC = 3, CD = 0, DC = 5, DD = 1, callC = TRUE,
 
     payoffs <- c(CC, CD, DC, DD);
 
-    AGENTS       <- NULL;
-    FITNESS      <- NULL;
-    mean_fitness <- NULL;
+    AGENTS       <- list();
+    FITNESS      <- list();
 
     gen <- 0;
 
@@ -109,9 +107,9 @@ games_ga <- function(CC = 3, CD = 0, DC = 5, DD = 1, callC = TRUE,
 
     final_agents[final_agents==0]   <- "C";
     final_agents[final_agents=="1"] <- "D";
-    strats <- NULL;
+    strats <- rep(x = NA, size = 100);
     for(i in 1:100){
-        strats[[i]] <- paste(final_agents[i,], collapse=" ");
+        strats[i] <- paste(final_agents[i,], collapse=" ");
     }
 
     strats_tab <- table(strats);
@@ -132,9 +130,9 @@ games_ga <- function(CC = 3, CD = 0, DC = 5, DD = 1, callC = TRUE,
     rownames(summ_geno) <- NULL
     colnames(summ_geno) <- summ_geno[1,];
     summ_geno <- summ_geno[-1,];
-    geno_rows <- NULL;
+    geno_rows <- rep(x = NA, size = dim(summ_geno)[1]);
     for(i in 1:dim(summ_geno)[1]){
-        geno_rows <- c(geno_rows, paste("Strategy",i));
+        geno_rows[i] <- paste("Strategy",i);
     }
     rownames(summ_geno) <- geno_rows;
     
