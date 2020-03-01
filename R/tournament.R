@@ -12,7 +12,7 @@
 tournament <- function(agents, fitness){
     sum_fit    <- lapply(X = fitness, FUN = sum);
     tot_fit    <- unlist(sum_fit);
-    new_agents <- NULL;
+    new_agents <- list();
     for(i in 1:length(fitness)){
         rand_draw <- sample(x = 1:length(fitness), size = 10, replace = TRUE);
         maxfit    <- max(tot_fit[rand_draw]);

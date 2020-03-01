@@ -26,9 +26,9 @@ get_fitness <- function(history, agents, payoffs, num_opponents, rounds, useC){
         parameters  <- c(num_opponents, rounds, pay);
         fitness     <- run_fitness(history, agent_array, parameters);
     } else{
-        fitness    <- NULL;
         num_agents <- length(agents);
-    
+        fitness    <- rep(x = NA, length = num_agents);
+        
         for(foc in 1:num_agents){
         
             opponents <- sample(x=1:num_agents, size=num_opponents, 
